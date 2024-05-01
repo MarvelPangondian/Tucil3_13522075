@@ -1,4 +1,7 @@
+import java.io.IOException;
+
 import datastructure.*;
+import dictionary.*;
 public class Main {
     public static void main(String args[]){
         Node n1 = new Node("love",100);
@@ -10,6 +13,13 @@ public class Main {
         // System.out.println(n2);
         while (!queue.isEmpty()){
             System.out.println(queue.dequeueNode().getWord());
+        }
+
+        try {
+            Dictionary dictionary = new Dictionary("src/main/dictionary/data.txt");
+            System.out.println("Neighbors of 'word': " + dictionary.getNeighbors("marvelpangondian"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
