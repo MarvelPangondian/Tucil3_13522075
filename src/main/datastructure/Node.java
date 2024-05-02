@@ -62,5 +62,18 @@ public class Node {
         temp += "]";
         return temp;
     }
+
+    public int getWordDifference(Node endWord){
+        int count = 0;
+        char[] arr1 = this.getWord().toCharArray();
+        char[] arr2 = endWord.getWord().toCharArray();
+        // asumsikan kedua word memiliki leng
+        for (int i = 0 ; i < arr1.length ; i++){
+            if (arr1[i] != arr2[i]){
+                count++;
+            }
+        }
+        return count;
+    }
     
 }

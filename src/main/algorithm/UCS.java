@@ -11,7 +11,7 @@ public class UCS {
         visited = new HashMap<>();
     }
 
-    public String[] getUniformCostSearch(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
+    public Node getUniformCostSearch(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
@@ -37,7 +37,7 @@ public class UCS {
 
             //check
             if (currNode.getWord().equals(endWord) ){
-                return currNode.getPath();
+                return currNode;
             }
 
             List<String> newNodes = dictionary.getNeighbors(currNode.getWord());
@@ -48,7 +48,7 @@ public class UCS {
                     visited.put(nodeString,true);
                     Node node = new Node(nodeString,currNode.getValue() + 1, currNode.getPath());
                     if (node.getWord().equals(endWord) ){
-                        return node.getPath();
+                        return node;
                     }
                     queue.addNode(node);
                 }
@@ -59,7 +59,7 @@ public class UCS {
         }
 
 
-        return new String[]{};
+        return lastNode;
 
 
         
