@@ -4,13 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import datastructure.*;
-
 import customexception.CustomException;
 import datastructure.PriorityQueueNode;
 import dictionary.Dictionary;
 
 public class AStar {
-       private Map<String, Boolean> visited;
+    private Map<String, Boolean> visited;
     public AStar(){
         visited = new HashMap<>();
     }
@@ -32,12 +31,15 @@ public class AStar {
         }
 
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0
+        Node lastNode = new Node();
+        Node record = new Node();
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);
-        Node lastNode = new Node();
         boolean done = false;
+        visited.put(startWord, true);
         while (!queue.isEmpty() && !done){
             Node currNode = queue.dequeueNode();
+            record = currNode;
             // dequeue
             if (lastNode.getValue() != -1){
                 if (currNode.getValue() > lastNode.getValue()){
@@ -66,11 +68,10 @@ public class AStar {
                 }
             }
         }
-
-
+        if (lastNode.getValue() == -1){
+            lastNode = record;
+        }
         return lastNode;
-
-
         
     }
 

@@ -1,5 +1,6 @@
 package datastructure;
-
+import dictionary.Dictionary;
+import util.*;
 public class Node {
     private String word;
     private int value; // value can be g(n), h(n), or f(n) = g(n) + f(n)
@@ -73,6 +74,40 @@ public class Node {
         return temp;
     }
 
+    public void printPath(float timeInMs, int algorithmType, String endWord,Dictionary dictionary){
+        final String RED = "\u001B[31m";
+        final String RESET = "\u001B[0m";
+        boolean found = true;
+        if (this.getWord().compareTo(endWord) != 0){
+            found = false;
+            System.out.println(RED + "No path can be found !" + RESET);
+        }
+        System.out.println("Word path : ");
+        for (String word : this.path){
+            System.out.print("-> ");
+            System.out.print(StringUtil.printNodeInColor(word, endWord));
+            if (!found){
+                System.out.print(", child nodes : ");StringUtil.printArrNodeInColor(dictionary.getNeighbors(word).toArray(new String[0]), endWord);
+            }
+            System.out.println();
+        }
+        if (this.getWord().compareTo(endWord) != 0){
+            System.out.println(RED + "STUCK/DEAD END" + RESET);
+        }
+        if (algorithmType == 1){
+            System.out.print("g(n) = ");
+        } else if (algorithmType == 2){
+            System.out.print("h(n) = ");
+        } else if (algorithmType == 3){
+            System.out.print("g(n) + h(n) = ");
+        } else {
+            return;
+        }
+        System.out.println(this.value);
+
+        System.out.printf("Time : %f ms\n",timeInMs);
+
+    }
     public int getWordDifference(String endWord){
         int count = 0;
         char[] arr1 = this.getWord().toCharArray();

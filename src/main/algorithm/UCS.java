@@ -1,4 +1,5 @@
 package algorithm;
+
 import java.util.*;
 import datastructure.*;
 import dictionary.Dictionary;
@@ -28,21 +29,21 @@ public class UCS {
         }
 
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0
+        // Node lastNode = new Node();
+        Node record = new Node();
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);
-        Node lastNode = new Node();
-        while (!queue.isEmpty() && lastNode.getValue() == -1){
+        visited.put(startWord, true);
+        while (!queue.isEmpty()){
             // dequeue
             Node currNode = queue.dequeueNode();
+            record = currNode;
 
             //check
             if (currNode.getWord().equals(endWord) ){
                 return currNode;
             }
-
             List<String> newNodes = dictionary.getNeighbors(currNode.getWord());
-
-            
             for(String nodeString : newNodes){
                 if (!visited.containsKey(nodeString)){
                     visited.put(nodeString,true);
@@ -57,9 +58,7 @@ public class UCS {
                 }
             }
         }
-
-
-        return lastNode;
+        return record;
 
 
         
