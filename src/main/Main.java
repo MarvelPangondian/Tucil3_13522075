@@ -9,9 +9,9 @@ public class Main {
     public static void main(String args[]){
         try {
             Dictionary dictionary = new Dictionary("src/main/dictionary/data.txt");
-            AStar algorithm = new AStar();
+            GreedyBestFirst algorithm = new GreedyBestFirst();
             System.out.println("Processing");
-            Node hasil = algorithm.getAStar("cold", "warm", dictionary);
+            Node hasil = algorithm.getGreedyBestFirst("cold", "warm", dictionary);
             System.out.println("Done !");
             System.out.println("Path : ");
             for (String what : hasil.getPath()){

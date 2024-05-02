@@ -7,7 +7,8 @@ public class Node {
 
     public Node(){
         this.word = "";
-        this.value = 0;
+        this.value = -1;
+        this.path = new String[]{};
     }
     public Node(String word, int value){
         this.word = word;
@@ -18,6 +19,15 @@ public class Node {
     public Node(String word, int value, String[] parentPath){
         this.word = word;
         this.value = value;
+        int tempSize = parentPath.length;
+        this.path = new String[tempSize + 1];
+        System.arraycopy(parentPath, 0, this.path, 0, tempSize);
+        this.path[tempSize] = word;
+    }
+
+    public Node(String word, String target ,String[] parentPath){
+        this.word = word;
+        this.value = this.getWordDifference(target);
         int tempSize = parentPath.length;
         this.path = new String[tempSize + 1];
         System.arraycopy(parentPath, 0, this.path, 0, tempSize);
@@ -63,10 +73,10 @@ public class Node {
         return temp;
     }
 
-    public int getWordDifference(Node endWord){
+    public int getWordDifference(String endWord){
         int count = 0;
         char[] arr1 = this.getWord().toCharArray();
-        char[] arr2 = endWord.getWord().toCharArray();
+        char[] arr2 = endWord.toCharArray();
         // asumsikan kedua word memiliki leng
         for (int i = 0 ; i < arr1.length ; i++){
             if (arr1[i] != arr2[i]){

@@ -32,10 +32,9 @@ public class AStar {
         }
 
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0
-        Node end = new Node(endWord, -1);
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);
-        Node lastNode = new Node("Placeholder",-1);
+        Node lastNode = new Node();
         boolean done = false;
         while (!queue.isEmpty() && !done){
             Node currNode = queue.dequeueNode();
@@ -59,7 +58,7 @@ public class AStar {
                 if (!visited.containsKey(nodeString)){
                     visited.put(nodeString,true);
                     Node node = new Node(nodeString, currNode.getPath().length , currNode.getPath());
-                    node.setValue(node.getValue() + node.getWordDifference(end));
+                    node.setValue(node.getValue() + node.getWordDifference(endWord));
                     queue.addNode(node);
                 }
                 else {

@@ -30,7 +30,7 @@ public class UCS {
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);
-        Node lastNode = new Node("Placeholder",-1);
+        Node lastNode = new Node();
         while (!queue.isEmpty() && lastNode.getValue() == -1){
             // dequeue
             Node currNode = queue.dequeueNode();
