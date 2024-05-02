@@ -13,12 +13,18 @@ public class UCS {
 
     public String[] getUniformCostSearch(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
         visited.clear();
+        startWord = startWord.toLowerCase();
+        endWord = endWord.toLowerCase();
 
         if (!dictionary.isWord(startWord)){
             throw new CustomException("start word doesn't exist");
         }
         if (!dictionary.isWord(endWord)){
             throw new CustomException("end word doesn't exist");
+        }
+
+        if (startWord.length() != endWord.length()){
+            throw new CustomException("Unequal lengths of words");
         }
 
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0

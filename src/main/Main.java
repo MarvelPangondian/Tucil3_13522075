@@ -9,8 +9,10 @@ public class Main {
         try {
             Dictionary dictionary = new Dictionary("src/main/dictionary/data.txt");
             UCS algorithm = new UCS();
-            String[] hasil = algorithm.getUniformCostSearch("marvel", "marver", dictionary);
-            System.out.println(hasil.length);
+            System.out.println("Processing");
+            String[] hasil = algorithm.getUniformCostSearch("cold", "warm", dictionary);
+            System.out.println("Done !");
+            System.out.println("Path : ");
             for (String what : hasil){
                 System.out.println(what);
             }
