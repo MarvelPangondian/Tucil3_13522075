@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import datastructure.*;
-import customexception.CustomException;
+import customexception.*;
 import datastructure.PriorityQueueNode;
 import dictionary.Dictionary;
 
@@ -20,14 +20,14 @@ public class AStar {
         endWord = endWord.toLowerCase();
 
         if (!dictionary.isWord(startWord)){
-            throw new CustomException("start word doesn't exist");
+            throw new InvalidStartWordException();
         }
         if (!dictionary.isWord(endWord)){
-            throw new CustomException("end word doesn't exist");
+            throw new InvalidEndWordException();
         }
 
         if (startWord.length() != endWord.length()){
-            throw new CustomException("Unequal lengths of words");
+            throw new InvalidLengthWord(startWord, endWord);
         }
 
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0

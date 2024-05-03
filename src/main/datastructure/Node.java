@@ -1,4 +1,6 @@
 package datastructure;
+import customexception.CustomException;
+import customexception.InvalidLengthWord;
 import dictionary.Dictionary;
 import util.*;
 public class Node {
@@ -26,7 +28,7 @@ public class Node {
         this.path[tempSize] = word;
     }
 
-    public Node(String word, String target ,String[] parentPath){
+    public Node(String word, String target ,String[] parentPath) throws CustomException{
         this.word = word;
         this.value = this.getWordDifference(target);
         int tempSize = parentPath.length;
@@ -108,7 +110,10 @@ public class Node {
         System.out.printf("Time : %f ms\n",timeInMs);
 
     }
-    public int getWordDifference(String endWord){
+    public int getWordDifference(String endWord) throws CustomException{
+        if (this.getWord().length() != endWord.length()){
+            throw new InvalidLengthWord(this.getWord(), endWord);
+        }
         int count = 0;
         char[] arr1 = this.getWord().toCharArray();
         char[] arr2 = endWord.toCharArray();

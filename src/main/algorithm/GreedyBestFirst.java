@@ -25,7 +25,7 @@ public class GreedyBestFirst {
             throw new InvalidEndWordException();
         }
         if (startWord.length() != endWord.length()){
-            throw new InvalidLengthWord();
+            throw new InvalidLengthWord(startWord,endWord);
         }
 
         Node lastNode = new Node();
