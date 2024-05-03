@@ -62,14 +62,10 @@ public class Main {
                 CLI cli = new CLI(dictionary,prompt);
                 cli.showCLI();
                 break;
-
+                
             default:
                 break;
         }
-
-
-        
-        
         scanner.close();
 
     }

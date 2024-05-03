@@ -75,12 +75,14 @@ public class AppGUI extends JFrame {
                     case "A Star": algorithm = new AStar(); break;
                     default: throw new CustomException("Invalid Algorithm");
                 }
+                long startTime = System.nanoTime();
                 Node result = algorithm.search(startWord, endWord, dictionary);
+                long endTime = System.nanoTime();
+                float executionTime = (endTime - startTime) / 1_000_000.0f;
                 if (result.getWord().compareTo(endWord) != 0){
-                    throw new CustomException("No path can be found !");
+                    throw new CustomException(String.format("No path can be found !\n Nodes Traversed: %d\n Time: %f ms",Node.getNodesTraverse(),executionTime));
                 }
-                String[] searchResults = result.getPath();
-                SearchResultWindow resultWindow = new SearchResultWindow(searchResults);
+                SearchResultWindow resultWindow = new SearchResultWindow(result,executionTime,selectedAlgorithm);
                 resultWindow.setVisible(true);
         
                 System.out.println("Starting search from: " + startWord + " to " + endWord + " using " + selectedAlgorithm);
@@ -104,20 +106,38 @@ public class AppGUI extends JFrame {
     }
 
     // Class for the search results window
-    class SearchResultWindow extends JFrame {
+class SearchResultWindow extends JFrame {
         private JList<String> resultList;
         private DefaultListModel<String> listModel;
 
-        public SearchResultWindow(String[] searchResults) {
+        public SearchResultWindow(Node result, float executionTime, String algorithmName) {
             super("Search Results");
-            setSize(300, 200);
+            setSize(600, 400);
+            setLocationRelativeTo(null);
+
+            String[] searchResults = result.getPath();
+            
             listModel = new DefaultListModel<>();
             resultList = new JList<>(listModel);
+            resultList.setFont(new Font("Arial", Font.PLAIN, 14));
+
             JScrollPane scrollPane = new JScrollPane(resultList);
+            scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            JPanel headerPanel = new JPanel(new GridLayout(3, 1));
+            headerPanel.add(new JLabel("Result", JLabel.CENTER));
+            headerPanel.add(new JLabel("Using " + algorithmName, JLabel.CENTER));
+            headerPanel.add(new JLabel("Time taken: " + executionTime + " ms", JLabel.CENTER));
+    
+            getContentPane().add(headerPanel, BorderLayout.NORTH);
             getContentPane().add(scrollPane, BorderLayout.CENTER);
-            for (String result : searchResults) {
-                listModel.addElement(result);
-            }
+    
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            int count = 1;
+            for (String word : searchResults) {
+                listModel.addElement(String.format("%d. %s",count,word));
+                count++;
+            }
+            listModel.addElement(String.format("Nodes traversed : %d",Node.getNodesTraverse()));
+            setVisible(true);
         }
 }
