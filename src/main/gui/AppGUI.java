@@ -2,10 +2,19 @@ package gui;
 
 
 import javax.swing.*;
+
+import algorithm.AStar;
+import algorithm.GreedyBestFirst;
+import algorithm.SearchAlgorithm;
+import algorithm.UCS;
+import customexception.CustomException;
+import customexception.EmptyWordException;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import dictionary.Dictionary; 
+import datastructure.*;
 
 public class AppGUI extends JFrame {
         private JTextField startWordField;
@@ -15,10 +24,10 @@ public class AppGUI extends JFrame {
 
         public AppGUI() {
             super("Search GUI");
-            initializeGUI();
+            
         }
 
-        private void initializeGUI() {
+        private void initializeGUI(Dictionary dictionary) {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(400, 300);
             setLayout(new GridLayout(5, 2, 10, 10));
@@ -42,39 +51,53 @@ public class AppGUI extends JFrame {
             searchButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    performSearch();
+                    performSearch(dictionary);
                 }
             });
 
             setVisible(true);
         }
 
-        private void performSearch() {
+        private void performSearch(Dictionary dictionary) {
             try {
-                String startWord = startWordField.getText();
-                String endWord = endWordField.getText();
+                String startWord = startWordField.getText().toLowerCase();
+                String endWord = endWordField.getText().toLowerCase();
                 String selectedAlgorithm = (String) algorithmDropdown.getSelectedItem();
         
                 // Simulate search process and throw an exception to demonstrate handling
                 if (startWord.isEmpty() || endWord.isEmpty()) {
-                    throw new IllegalArgumentException("Start or end word cannot be empty.");
+                    throw new EmptyWordException();
                 }
-        
-                String[] searchResults = {"Example 1", "Example 2", "Example 3"};
+                SearchAlgorithm algorithm = null;
+                switch (selectedAlgorithm) {
+                    case "Uniform Cost Search" : algorithm = new UCS(); break;
+                    case "Best First Search": algorithm = new GreedyBestFirst(); break;
+                    case "A Star": algorithm = new AStar(); break;
+                    default: throw new CustomException("Invalid Algorithm");
+                }
+                Node result = algorithm.search(startWord, endWord, dictionary);
+                if (result.getWord().compareTo(endWord) != 0){
+                    throw new CustomException("No path can be found !");
+                }
+                String[] searchResults = result.getPath();
                 SearchResultWindow resultWindow = new SearchResultWindow(searchResults);
                 resultWindow.setVisible(true);
         
                 System.out.println("Starting search from: " + startWord + " to " + endWord + " using " + selectedAlgorithm);
-            } catch (Exception e) {
+                
+            }catch (CustomException e){
                 JOptionPane.showMessageDialog(this, "Error during search: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
-            }
+
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error during search: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            } 
         }
 
-        public static void showGUI(Dictionary dictionary) {
+        public void showGUI(Dictionary dictionary) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    new AppGUI();
+                    initializeGUI(dictionary);
                 }
             });
         }

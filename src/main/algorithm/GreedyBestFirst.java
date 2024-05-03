@@ -7,13 +7,13 @@ import customexception.*;
 import datastructure.*;
 import dictionary.Dictionary;
 
-public class GreedyBestFirst {
+public class GreedyBestFirst implements SearchAlgorithm{
     private Map<String, Boolean> visited;
     public GreedyBestFirst(){
         visited = new HashMap<>();
     }
 
-    public Node getGreedyBestFirst(String startWord, String endWord, Dictionary dictionary) throws CustomException{
+    public Node search(String startWord, String endWord, Dictionary dictionary) throws CustomException{
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();

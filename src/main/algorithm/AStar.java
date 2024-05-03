@@ -8,13 +8,13 @@ import customexception.*;
 import datastructure.PriorityQueueNode;
 import dictionary.Dictionary;
 
-public class AStar {
+public class AStar implements SearchAlgorithm{
     private Map<String, Boolean> visited;
     public AStar(){
         visited = new HashMap<>();
     }
 
-    public Node getAStar(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
+    public Node search(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
         Node.resetNodesTraverse();
         visited.clear();
         startWord = startWord.toLowerCase();
