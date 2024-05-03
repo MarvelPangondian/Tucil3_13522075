@@ -45,4 +45,17 @@ public class StringUtil {
         System.out.print("]");
     }
     
+
+    public static String highlightCertainCharacters(String word, String target) {
+        StringBuilder highlighted = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            if (i < target.length() && word.charAt(i) == target.charAt(i)) {
+                highlighted.append("<span style='color:green'>").append(word.charAt(i)).append("</span>");
+            } else {
+                highlighted.append(word.charAt(i));
+            }
+        }
+
+        return highlighted.toString();
+    }
 }

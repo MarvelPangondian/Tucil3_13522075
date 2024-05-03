@@ -8,6 +8,8 @@ public class Node {
     private int value; // value can be g(n), h(n), or f(n) = g(n) + f(n)
     private String path[];
     private static int nodesTraverse;
+    private static String startWord;
+    private static String endWord;
 
     public Node(){
         this.word = "";
@@ -60,6 +62,22 @@ public class Node {
 
     public String[] getPath(){
         return this.path;
+    }
+
+    public static String getStartWord(){
+        return Node.startWord;
+    }
+
+    public static String getEndWord(){
+        return Node.endWord;
+    }
+
+    public static void setStartWord(String startWord){
+        Node.startWord = startWord;
+    }
+
+    public static void setEndWord(String endWord){
+        Node.endWord = endWord;
     }
 
     public static void resetNodesTraverse(){

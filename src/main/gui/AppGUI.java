@@ -13,7 +13,8 @@ import customexception.EmptyWordException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import dictionary.Dictionary; 
+import dictionary.Dictionary;
+import util.StringUtil;
 import datastructure.*;
 
 public class AppGUI extends JFrame {
@@ -114,30 +115,35 @@ class SearchResultWindow extends JFrame {
             super("Search Results");
             setSize(600, 400);
             setLocationRelativeTo(null);
-
+    
             String[] searchResults = result.getPath();
             
             listModel = new DefaultListModel<>();
             resultList = new JList<>(listModel);
             resultList.setFont(new Font("Arial", Font.PLAIN, 14));
-
+    
             JScrollPane scrollPane = new JScrollPane(resultList);
             scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            JPanel headerPanel = new JPanel(new GridLayout(3, 1));
+            
+            JPanel headerPanel = new JPanel(new GridLayout(4, 1));
             headerPanel.add(new JLabel("Result", JLabel.CENTER));
             headerPanel.add(new JLabel("Using " + algorithmName, JLabel.CENTER));
             headerPanel.add(new JLabel("Time taken: " + executionTime + " ms", JLabel.CENTER));
+            headerPanel.add(new JLabel("Nodes Traversed: " + Node.getNodesTraverse() , JLabel.CENTER));
     
             getContentPane().add(headerPanel, BorderLayout.NORTH);
             getContentPane().add(scrollPane, BorderLayout.CENTER);
     
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    
             int count = 1;
             for (String word : searchResults) {
-                listModel.addElement(String.format("%d. %s",count,word));
+                String highlightedWord = StringUtil.highlightCertainCharacters(word,Node.getEndWord());
+                listModel.addElement(String.format("<html>%d. %s </html>",count,highlightedWord ));
                 count++;
             }
-            listModel.addElement(String.format("Nodes traversed : %d",Node.getNodesTraverse()));
+            
             setVisible(true);
         }
+    
 }

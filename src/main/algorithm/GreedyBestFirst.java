@@ -28,7 +28,8 @@ public class GreedyBestFirst implements SearchAlgorithm{
         if (startWord.length() != endWord.length()){
             throw new InvalidLengthWord(startWord,endWord);
         }
-
+        Node.setStartWord(startWord);
+        Node.setEndWord(endWord);
         Node lastNode = new Node();
         Node targetNode = new Node(endWord, endWord, new String[]{});
         Node currNode = new Node(startWord,endWord,new String[]{});

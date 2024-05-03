@@ -28,7 +28,8 @@ public class UCS implements SearchAlgorithm {
         if (startWord.length() != endWord.length()){
             throw new InvalidLengthWord(startWord, endWord);
         }
-
+        Node.setStartWord(startWord);
+        Node.setEndWord(endWord);
         Node start = new Node(startWord,0); // distance of start node with root (itself) is 0
         // Node lastNode = new Node();
         Node record = new Node();
