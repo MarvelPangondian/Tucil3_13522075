@@ -3,6 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dictionary.*;
+import util.StringUtil;
 import customexception.*;
 import algorithm.*;
 import datastructure.*;
@@ -10,13 +11,9 @@ import datastructure.*;
 
 public class Main {
     public static void main(String args[]){
-        Dictionary dictionary;
-        try {
-            dictionary = new Dictionary("src/main/dictionary/data.txt");
-        } catch (IOException e){
-            System.out.println(e.getMessage());
-            return;
-        }
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
+
 
         System.out.println("      _.--._  _.--._\r\n" + //
                         ",-=.-\":;:;:;\\':;:;:;\"-._\r\n" + //
@@ -32,16 +29,33 @@ public class Main {
         
         System.out.println("Word Ladder Program");
         System.out.println("By Marvel Pangondian - 13522075");
-        Scanner scanner = new Scanner(System.in);
-        int choice = 0;
+        System.out.println("=================================================================");
+        System.out.println("Picking dictionary");
+        System.out.println("make sure the dictionary is in the test folder !");
+
+        Dictionary dictionary;
+        try {
+            System.out.print("Enter Dictionary name (with .txt): ");
+            String dictionaryFileName = scanner.nextLine();
+            dictionary = new Dictionary("test/" + dictionaryFileName);
+            
+        } catch (IOException e){
+            System.out.println(StringUtil.getWordInRed("Something Went Wrong"));
+            System.out.println(e.getMessage());
+            scanner.close();
+            return;
+        }
+
         while (choice != -1) {
             try {
                 System.out.println("=================================================================");
                 System.out.println("Main Menu");
                 System.out.print("Enter Start Word: ");
                 String startWord = scanner.nextLine();
+                startWord = startWord.toLowerCase();
                 System.out.print("Enter End Word: ");
                 String endWord = scanner.nextLine();
+                endWord = endWord.toLowerCase();
                 System.out.println("\nPick algorithm to use ");
                 System.out.println("1.Uniform Cost Search Algorithm ");
                 System.out.println("2.Greedy Best-First Search Algorithm ");

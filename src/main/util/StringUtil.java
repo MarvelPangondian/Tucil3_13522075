@@ -20,6 +20,19 @@ public class StringUtil {
     return coloredOutput.toString();
 
     }
+
+    public static String getWordInRed(String word){
+        final String ANSI_RESET = "\u001B[0m";
+        final String RED = "\u001B[31m";
+        return RED + word + ANSI_RESET;
+    }
+
+    public static String getWordInGreen(String word){
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+        return ANSI_GREEN + word + ANSI_RESET;
+    }
+
     public static void printArrNodeInColor(String[] nodes, String endWord){
         System.out.print("[");
         for (int i = 0 ; i < nodes.length ; i++){

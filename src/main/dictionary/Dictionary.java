@@ -1,6 +1,9 @@
 package dictionary;
 
 import java.util.*;
+
+import util.StringUtil;
+
 import java.io.*;
 
 public class Dictionary {
@@ -8,8 +11,10 @@ public class Dictionary {
     private Map<String, List<String>> neighbors = new HashMap<>();
 
     public Dictionary(String fileName) throws IOException {
+        System.out.println("Loading Dictionary...");
         this.loadWords(fileName);
         this.generateNeighbors();
+        System.out.println(StringUtil.getWordInGreen("DONE"));
     }
 
     private void loadWords(String fileName) throws IOException {
