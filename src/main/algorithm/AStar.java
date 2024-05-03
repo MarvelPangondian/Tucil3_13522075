@@ -15,6 +15,7 @@ public class AStar {
     }
 
     public Node getAStar(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
+        Node.resetNodesTraverse();
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
@@ -37,8 +38,11 @@ public class AStar {
         queue.addNode(start);
         boolean done = false;
         visited.put(startWord, true);
+  
+        
         while (!queue.isEmpty() && !done){
             Node currNode = queue.dequeueNode();
+            Node.incrementNodesTraverse();
             record = currNode;
             // dequeue
             if (lastNode.getValue() != -1){

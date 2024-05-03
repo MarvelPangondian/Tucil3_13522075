@@ -17,6 +17,7 @@ public class GreedyBestFirst {
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
+        Node.resetNodesTraverse();
 
         if (!dictionary.isWord(startWord)){
             throw new InvalidStartWordException();
@@ -35,8 +36,8 @@ public class GreedyBestFirst {
         visited.put(startWord, true);
 
         while (currNode != null){
+            Node.incrementNodesTraverse();
             record = currNode;
-            // System.out.print(StringUtil.printNodeInColor(currNode.getWord(), endWord));
 
             if (currNode.getWord().equals(endWord)){
                 lastNode = currNode;

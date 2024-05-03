@@ -7,6 +7,7 @@ public class Node {
     private String word;
     private int value; // value can be g(n), h(n), or f(n) = g(n) + f(n)
     private String path[];
+    private static int nodesTraverse;
 
     public Node(){
         this.word = "";
@@ -61,6 +62,18 @@ public class Node {
         return this.path;
     }
 
+    public static void resetNodesTraverse(){
+        Node.nodesTraverse = 0;
+    }
+
+    public static void incrementNodesTraverse(){
+        Node.nodesTraverse++;
+    }
+
+    public static int getNodesTraverse(){
+        return Node.nodesTraverse;
+    }
+
     public String toString(){
         String temp = "[";
         for (int i = 0; i < this.path.length; i++) {
@@ -79,16 +92,14 @@ public class Node {
     public void printPath(float timeInMs, int algorithmType, String endWord,Dictionary dictionary){
         final String RED = "\u001B[31m";
         final String RESET = "\u001B[0m";
-        boolean found = true;
         if (this.getWord().compareTo(endWord) != 0){
-            found = false;
             System.out.println(RED + "No path can be found !" + RESET);
         }
         System.out.println("Word path : ");
         for (String word : this.path){
             System.out.print("-> ");
             System.out.print(StringUtil.printNodeInColor(word, endWord));
-            if (!found){
+            if (algorithmType == 2){
                 System.out.print(", child nodes : ");StringUtil.printArrNodeInColor(dictionary.getNeighbors(word).toArray(new String[0]), endWord);
             }
             System.out.println();
@@ -106,7 +117,7 @@ public class Node {
             return;
         }
         System.out.println(this.value);
-
+        System.out.println("Nodes traversed : " + Node.getNodesTraverse());
         System.out.printf("Time : %f ms\n",timeInMs);
 
     }

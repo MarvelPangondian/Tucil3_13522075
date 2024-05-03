@@ -16,6 +16,7 @@ public class UCS {
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
+        Node.resetNodesTraverse();
 
         if (!dictionary.isWord(startWord)){
             throw new InvalidStartWordException();
@@ -38,6 +39,7 @@ public class UCS {
             // dequeue
             Node currNode = queue.dequeueNode();
             record = currNode;
+            Node.incrementNodesTraverse();
 
             //check
             if (currNode.getWord().equals(endWord) ){
