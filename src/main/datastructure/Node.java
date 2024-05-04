@@ -147,9 +147,9 @@ public class Node {
     public void printPath(float timeInMs, int algorithmType, String endWord,Dictionary dictionary){
         final String RED = "\u001B[31m";
         final String RESET = "\u001B[0m";
-        boolean found = true;
+        // boolean found = true;
         if (this.getWord().compareTo(endWord) != 0){
-            found = false;
+            // found = false;
             System.out.println(RED + "No path can be found !" + RESET);
         }
         System.out.println("Word path : ");
@@ -158,9 +158,9 @@ public class Node {
             System.out.print(String.format("-> %d. ", count));
             count++;
             System.out.print(StringUtil.printNodeInColor(word, endWord));
-            if (!found){
-                System.out.print(", child nodes : ");StringUtil.printArrNodeInColor(dictionary.getNeighbors(word).toArray(new String[0]), endWord);
-            }
+            // if (!found){
+            //     System.out.print(", child nodes : ");StringUtil.printArrNodeInColor(dictionary.getNeighbors(word).toArray(new String[0]), endWord);
+            // }
             System.out.println();
         }
         if (this.getWord().compareTo(endWord) != 0){

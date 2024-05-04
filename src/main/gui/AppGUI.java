@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import dictionary.Dictionary;
-import util.StringUtil;
 import datastructure.*;
 
 public class AppGUI extends JFrame {
@@ -102,44 +101,64 @@ public class AppGUI extends JFrame {
                 }
             });
         }
-    }
-
-// Class for the search results window
+}
+    
 class SearchResultWindow extends JFrame {
         private JList<String> resultList;
         private DefaultListModel<String> listModel;
-
+    
         public SearchResultWindow(Node result, float executionTime, String algorithmName) {
             super("Search Results");
-            setSize(600, 400);
             setLocationRelativeTo(null);
     
             String[] searchResults = result.getPath();
-            
+    
             listModel = new DefaultListModel<>();
             resultList = new JList<>(listModel);
             resultList.setFont(new Font("Arial", Font.PLAIN, 14));
     
-            JScrollPane scrollPane = new JScrollPane(resultList);
-            scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            
+            JScrollPane listScrollPane = new JScrollPane(resultList);
+            listScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    
             JPanel headerPanel = new JPanel(new GridLayout(5, 1));
             headerPanel.add(new JLabel("Result", JLabel.CENTER));
             headerPanel.add(new JLabel("Using " + algorithmName, JLabel.CENTER));
             headerPanel.add(new JLabel("Time taken: " + executionTime + " ms", JLabel.CENTER));
-            headerPanel.add(new JLabel("Nodes Traversed: " + Node.getNodesTraverse() , JLabel.CENTER));
-            headerPanel.add(new JLabel("Nodes Generated: " + Node.getNodesGenerated() , JLabel.CENTER));
-    
-            getContentPane().add(headerPanel, BorderLayout.NORTH);
-            getContentPane().add(scrollPane, BorderLayout.CENTER);
+            headerPanel.add(new JLabel("Nodes Traversed: " + Node.getNodesTraverse(), JLabel.CENTER));
+            headerPanel.add(new JLabel("Nodes Generated: " + Node.getNodesGenerated(), JLabel.CENTER));
     
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     
-            int count = 1;
+            JPanel gridPanel = new JPanel(new GridLayout(searchResults.length, 1, 0, 10));  
+            JScrollPane gridScrollPane = new JScrollPane(gridPanel); 
+            gridScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            gridScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+    
+            String endWord = Node.getEndWord();  
             for (String word : searchResults) {
-                String highlightedWord = StringUtil.highlightCertainCharacters(word,Node.getEndWord());
-                listModel.addElement(String.format("<html>%d. %s </html>",count,highlightedWord ));
-                count++;
+                JPanel wordPanel = new JPanel(new GridLayout(1, word.length(), 10, 0));  
+                wordPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));  
+                for (int i = 0; i < word.length(); i++) {
+                    JLabel letterLabel = new JLabel(String.valueOf(word.charAt(i)), SwingConstants.CENTER);
+                    letterLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    letterLabel.setFont(new Font("Arial", Font.BOLD, 18)); 
+                    if (endWord != null && word.charAt(i) == endWord.charAt(i)) {
+                        letterLabel.setBackground(Color.GREEN);
+                        letterLabel.setOpaque(true);
+                    }
+                    wordPanel.add(letterLabel);
+                }
+                gridPanel.add(wordPanel);
+            }
+    
+            getContentPane().add(headerPanel, BorderLayout.NORTH);
+            getContentPane().add(gridScrollPane, BorderLayout.CENTER);  
+    
+
+            if (searchResults.length > 10) {
+                setSize(600, 800);  
+            } else {
+                setSize(600, 400);  
             }
             
             setVisible(true);
