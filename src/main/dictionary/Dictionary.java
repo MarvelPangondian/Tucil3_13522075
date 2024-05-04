@@ -1,15 +1,13 @@
 package dictionary;
-
 import java.util.*;
-
 import util.StringUtil;
-
 import java.io.*;
 
 public class Dictionary {
     private Set<String> words = new HashSet<>();
     private Map<String, List<String>> neighbors = new HashMap<>();
 
+    // Constructor
     public Dictionary(String fileName) throws IOException {
         System.out.println("Loading Dictionary...");
         this.loadWords(fileName);
@@ -17,6 +15,8 @@ public class Dictionary {
         System.out.println(StringUtil.getWordInGreen("DONE"));
     }
 
+
+    // Load words in txt file
     private void loadWords(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;
@@ -26,6 +26,7 @@ public class Dictionary {
         reader.close();
     }
 
+    // Generate neighbouring words for every word in the dictionary
     private void generateNeighbors() {
         for (String word : words) {
             List<String> adjWords = new ArrayList<String>();
@@ -48,10 +49,12 @@ public class Dictionary {
         }
     }
 
+    // Determine if a word is in dictionary or not
     public boolean isWord(String word) {
         return this.words.contains(word);
     }
 
+    // get all neighbouring words
     public List<String> getNeighbors(String word) {
         return this.neighbors.getOrDefault(word, new ArrayList<>());
     }

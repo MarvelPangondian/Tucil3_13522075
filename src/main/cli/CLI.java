@@ -6,17 +6,16 @@ import datastructure.*;
 import prompt.*;
 
 public class CLI {
-    private Dictionary dictionary;
-    private Prompt prompt;
+    private Dictionary dictionary; // Hold Dictionary object
+    private Prompt prompt; // hold prompt for input
 
+    // Constructor
     public CLI(Dictionary dictionary, Prompt prompt) {
         this.dictionary = dictionary;
         this.prompt = prompt;
     }
 
-
-
-
+    // Method to show CLI
     public void showCLI(){
         int choice = 0;
         while (choice != -1) {

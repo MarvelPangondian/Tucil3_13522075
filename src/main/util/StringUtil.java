@@ -1,9 +1,8 @@
 package util;
 
-
-
 public class StringUtil {
 
+    // Static method to print a word in color, green letters for letters that are the same as endWord
     public static String printNodeInColor(String startWord, String endWord){
         final String ANSI_GREEN = "\u001B[32m";
         final String ANSI_RESET = "\u001B[0m";
@@ -16,23 +15,24 @@ public class StringUtil {
                 coloredOutput.append(startWord.charAt(i));
             }
         }
-
     return coloredOutput.toString();
-
     }
 
+    // Static method to get string in red color
     public static String getWordInRed(String word){
         final String ANSI_RESET = "\u001B[0m";
         final String RED = "\u001B[31m";
         return RED + word + ANSI_RESET;
     }
 
+    // Static method to get string in green color
     public static String getWordInGreen(String word){
         final String ANSI_GREEN = "\u001B[32m";
         final String ANSI_RESET = "\u001B[0m";
         return ANSI_GREEN + word + ANSI_RESET;
     }
 
+    // Static method to print array of words/nodes in color
     public static void printArrNodeInColor(String[] nodes, String endWord){
         System.out.print("[");
         for (int i = 0 ; i < nodes.length ; i++){
@@ -41,11 +41,10 @@ public class StringUtil {
                 System.out.print(", ");
             }
         }
-
         System.out.print("]");
     }
     
-
+    // Static method to highlight characters, will be used in GUI
     public static String highlightCertainCharacters(String word, String target) {
         StringBuilder highlighted = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
@@ -55,7 +54,6 @@ public class StringUtil {
                 highlighted.append(word.charAt(i));
             }
         }
-
         return highlighted.toString();
     }
 }

@@ -1,15 +1,11 @@
 package gui;
-
-
 import javax.swing.*;
-
 import algorithm.AStar;
 import algorithm.GreedyBestFirst;
 import algorithm.SearchAlgorithm;
 import algorithm.UCS;
 import customexception.CustomException;
 import customexception.EmptyWordException;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,11 +19,12 @@ public class AppGUI extends JFrame {
         private JComboBox<String> algorithmDropdown;
         private JButton searchButton;
 
+        // Constructor
         public AppGUI() {
-            super("Search GUI");
-            
+            super("Search GUI");  
         }
 
+        // Method to initialize GUI
         private void initializeGUI(Dictionary dictionary) {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(400, 300);
@@ -59,6 +56,7 @@ public class AppGUI extends JFrame {
             setVisible(true);
         }
 
+        // method to peform search
         private void performSearch(Dictionary dictionary) {
             try {
                 String startWord = startWordField.getText().toLowerCase();
@@ -106,7 +104,7 @@ public class AppGUI extends JFrame {
         }
     }
 
-    // Class for the search results window
+// Class for the search results window
 class SearchResultWindow extends JFrame {
         private JList<String> resultList;
         private DefaultListModel<String> listModel;
@@ -146,5 +144,4 @@ class SearchResultWindow extends JFrame {
             
             setVisible(true);
         }
-    
 }
