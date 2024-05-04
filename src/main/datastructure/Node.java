@@ -12,17 +12,22 @@ public class Node {
     private static String startWord;
     private static String endWord;
 
+    // Concstructor
     public Node(){
         this.word = "";
         this.value = -1;
         this.path = new String[]{};
     }
+    // Concstructor
+    // with node word and value
     public Node(String word, int value){
         this.word = word;
         this.value = value;
         this.path = new String[]{this.word};
     }
 
+    // Constructor
+    // constructor with parent path, extend parent path with current word
     public Node(String word, int value, String[] parentPath){
         this.word = word;
         this.value = value;
@@ -32,6 +37,7 @@ public class Node {
         this.path[tempSize] = word;
     }
 
+    // Constructor
     // constructor for greedy best first search
     public Node(String word, String target ,String[] parentPath) throws CustomException{ 
         this.word = word;
@@ -42,24 +48,13 @@ public class Node {
         this.path[tempSize] = word;
     }
 
+    // getters
     public String getWord(){
         return this.word;
     }
 
     public int getValue(){
         return this.value;
-    }
-    public void setWord(String word){
-        this.word = word;
-    }
-
-    public void setValue(int value){
-        this.value = value;
-    }
-
-    public void setPath(String[] path){
-        this.path = new String[path.length];
-        System.arraycopy(path, 0, this.path, 0, path.length);
     }
 
     public String[] getPath(){
@@ -74,6 +69,21 @@ public class Node {
         return Node.endWord;
     }
 
+    public static int getNodesTraverse(){
+        return Node.nodesTraverse;
+    }
+
+    public static int getNodesGenerated(){
+        return Node.nodesGenerated;
+    }
+    
+
+    // setters
+    public void setPath(String[] path){
+        this.path = new String[path.length];
+        System.arraycopy(path, 0, this.path, 0, path.length);
+    }
+
     public static void setStartWord(String startWord){
         Node.startWord = startWord;
     }
@@ -82,28 +92,22 @@ public class Node {
         Node.endWord = endWord;
     }
 
+    public void setWord(String word){
+        this.word = word;
+    }
+
+    public void setValue(int value){
+        this.value = value;
+    }
+
+
+    // reset static variables
     public static void resetNodesTraverse(){
         Node.nodesTraverse = 0;
     }
 
     public static void resetNodesGenerated(){
         Node.nodesGenerated = 0;
-    }
-
-    public static void incrementNodesTraverse(){
-        Node.nodesTraverse++;
-    }
-
-    public static void incrementNodesGenerated(){
-        Node.nodesGenerated++;
-    }
-
-    public static int getNodesTraverse(){
-        return Node.nodesTraverse;
-    }
-
-    public static int getNodesGenerated(){
-        return Node.nodesGenerated;
     }
 
     public static void resetNodeClass(){
@@ -113,6 +117,17 @@ public class Node {
         Node.endWord = "";
     }
 
+
+    // increment static variables
+    public static void incrementNodesTraverse(){
+        Node.nodesTraverse++;
+    }
+
+    public static void incrementNodesGenerated(){
+        Node.nodesGenerated++;
+    }
+
+    // toString for debugging
     public String toString(){
         String temp = "[";
         for (int i = 0; i < this.path.length; i++) {
@@ -128,6 +143,7 @@ public class Node {
         return temp;
     }
 
+    // printPath to print result of a node
     public void printPath(float timeInMs, int algorithmType, String endWord,Dictionary dictionary){
         final String RED = "\u001B[31m";
         final String RESET = "\u001B[0m";
@@ -163,8 +179,10 @@ public class Node {
         System.out.println("Nodes traversed : " + Node.getNodesTraverse());
         System.out.println("Nodes generated : " + Node.getNodesGenerated());
         System.out.printf("Time : %f ms\n",timeInMs);
-
     }
+
+    // Heuristic function
+    // is used by Node Heuristic Constructor
     public int getWordDifference(String endWord) throws CustomException{
         if (this.getWord().length() != endWord.length()){
             throw new InvalidLengthWord(this.getWord(), endWord);

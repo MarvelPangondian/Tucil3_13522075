@@ -1,7 +1,5 @@
 import java.io.IOException;
-
 import java.util.Scanner;
-
 import dictionary.*;
 import util.StringUtil;
 import cli.*;
@@ -62,7 +60,7 @@ public class Main {
                 CLI cli = new CLI(dictionary,prompt);
                 cli.showCLI();
                 break;
-                
+
             default:
                 break;
         }
