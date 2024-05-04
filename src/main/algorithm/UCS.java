@@ -7,9 +7,9 @@ import customexception.*;
 
 
 public class UCS implements SearchAlgorithm {
-    private Map<String, Boolean> visited;
+    private Set<String> visited;
     public UCS(){
-        visited = new HashMap<>();
+        visited = new HashSet<>();
     }
 
     public Node search(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
@@ -35,7 +35,7 @@ public class UCS implements SearchAlgorithm {
         Node record = new Node();
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);
-        visited.put(startWord, true);
+        visited.add(startWord);
         while (!queue.isEmpty()){
             // dequeue
             Node currNode = queue.dequeueNode();
@@ -48,8 +48,8 @@ public class UCS implements SearchAlgorithm {
             }
             List<String> newNodes = dictionary.getNeighbors(currNode.getWord());
             for(String nodeString : newNodes){
-                if (!visited.containsKey(nodeString)){
-                    visited.put(nodeString,true);
+                if (!visited.contains(nodeString)){
+                    visited.add(nodeString);
                     Node node = new Node(nodeString,currNode.getValue() + 1, currNode.getPath());
                     if (node.getWord().equals(endWord) ){
                         return node;

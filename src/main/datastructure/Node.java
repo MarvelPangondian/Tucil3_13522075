@@ -31,9 +31,10 @@ public class Node {
         this.path[tempSize] = word;
     }
 
-    public Node(String word, String target ,String[] parentPath) throws CustomException{
+    // constructor for greedy best first search
+    public Node(String word, String target ,String[] parentPath) throws CustomException{ 
         this.word = word;
-        this.value = this.getWordDifference(target);
+        this.value = this.getWordDifference(target); // heuristic function
         int tempSize = parentPath.length;
         this.path = new String[tempSize + 1];
         System.arraycopy(parentPath, 0, this.path, 0, tempSize);
@@ -116,8 +117,10 @@ public class Node {
             System.out.println(RED + "No path can be found !" + RESET);
         }
         System.out.println("Word path : ");
+        int count = 1;
         for (String word : this.path){
-            System.out.print("-> ");
+            System.out.print(String.format("-> %d. ", count));
+            count++;
             System.out.print(StringUtil.printNodeInColor(word, endWord));
             if (!found){
                 System.out.print(", child nodes : ");StringUtil.printArrNodeInColor(dictionary.getNeighbors(word).toArray(new String[0]), endWord);

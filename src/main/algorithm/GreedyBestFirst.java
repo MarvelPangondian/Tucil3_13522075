@@ -1,16 +1,17 @@
 package algorithm;
 
-import java.util.HashMap;
+
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import customexception.*;
 import datastructure.*;
 import dictionary.Dictionary;
 
 public class GreedyBestFirst implements SearchAlgorithm{
-    private Map<String, Boolean> visited;
+    private Set<String> visited;
     public GreedyBestFirst(){
-        visited = new HashMap<>();
+        visited = new HashSet<>();
     }
 
     public Node search(String startWord, String endWord, Dictionary dictionary) throws CustomException{
@@ -34,7 +35,7 @@ public class GreedyBestFirst implements SearchAlgorithm{
         Node targetNode = new Node(endWord, endWord, new String[]{});
         Node currNode = new Node(startWord,endWord,new String[]{});
         Node record = new Node();
-        visited.put(startWord, true);
+        visited.add(startWord);
 
         while (currNode != null){
             Node.incrementNodesTraverse();
@@ -51,7 +52,7 @@ public class GreedyBestFirst implements SearchAlgorithm{
             currNode = null;
             int count = 0;
             for (String temp : allNode){
-                if (visited.containsKey(temp)){
+                if (visited.contains(temp)){
                     continue;
                 }
                 if (count == 0){
@@ -66,7 +67,7 @@ public class GreedyBestFirst implements SearchAlgorithm{
                 }
             }
             if (currNode != null){
-                visited.put(currNode.getWord(), true);
+                visited.add(currNode.getWord());
             }
 
         }

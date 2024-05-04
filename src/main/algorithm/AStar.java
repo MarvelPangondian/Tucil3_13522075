@@ -1,17 +1,18 @@
 package algorithm;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+
 import datastructure.*;
 import customexception.*;
-import datastructure.PriorityQueueNode;
 import dictionary.Dictionary;
 
 public class AStar implements SearchAlgorithm{
-    private Map<String, Boolean> visited;
+    private Set<String> visited;
+
     public AStar(){
-        visited = new HashMap<>();
+        visited = new HashSet<>();
     }
 
     public Node search(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
@@ -38,7 +39,7 @@ public class AStar implements SearchAlgorithm{
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);
         boolean done = false;
-        visited.put(startWord, true);
+        visited.add(startWord);
   
         
         while (!queue.isEmpty() && !done){
@@ -62,8 +63,8 @@ public class AStar implements SearchAlgorithm{
 
             
             for(String nodeString : newNodes){
-                if (!visited.containsKey(nodeString)){
-                    visited.put(nodeString,true);
+                if (!visited.contains(nodeString)){
+                    visited.add(nodeString);
                     Node node = new Node(nodeString, currNode.getPath().length , currNode.getPath());
                     node.setValue(node.getValue() + node.getWordDifference(endWord));
                     queue.addNode(node);
