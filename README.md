@@ -19,12 +19,20 @@
 │       └─── 
 │
 ├─── doc
-│       ├─── lorem ipsum
+│       ├─── Spesifikasi Tugas Kecil 3 Stima 2023_2024
 │       └─── 
 │
 ├─── src
-│       ├─── lorem ipsum
-│       └─── 
+│       └─── main
+│                ├─── algorithm
+│                ├─── cli
+│                ├─── customexception
+│                ├─── datastructure
+│                ├─── dictionary
+│                ├─── gui
+│                ├─── prompt
+│                ├─── util
+│                └─── Main.java
 │
 ├─── test
 │       ├─── lorem ipsum
