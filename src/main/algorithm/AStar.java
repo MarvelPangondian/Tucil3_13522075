@@ -80,7 +80,7 @@ public class AStar implements SearchAlgorithm{
                     node.setValue(node.getValue() + node.getWordDifference(endWord)); // update value to use heuristic h(n), final value is f(n) = g(n) + h(n) 
                     queue.addNode(node); // add node to queue 
                 }
-                else {
+                else { // skip visited nodes
                     continue;
                 }
             }

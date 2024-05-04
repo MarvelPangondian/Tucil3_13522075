@@ -72,7 +72,7 @@ public class UCS implements SearchAlgorithm {
                     // add node to queue
                     queue.addNode(node);
                 }
-                else {
+                else { // skip visited nodes
                     continue;
                 }
             }
