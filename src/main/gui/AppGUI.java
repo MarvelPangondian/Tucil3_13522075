@@ -20,7 +20,7 @@ public class AppGUI extends JFrame {
 
         // Constructor
         public AppGUI() {
-            super("Search GUI");  
+            super("Word Ladder");  
         }
 
         // Method to initialize GUI
@@ -102,7 +102,7 @@ public class AppGUI extends JFrame {
             });
         }
 }
-    
+// class for search result
 class SearchResultWindow extends JFrame {
         private JList<String> resultList;
         private DefaultListModel<String> listModel;
@@ -120,12 +120,15 @@ class SearchResultWindow extends JFrame {
             JScrollPane listScrollPane = new JScrollPane(resultList);
             listScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     
-            JPanel headerPanel = new JPanel(new GridLayout(5, 1));
-            headerPanel.add(new JLabel("Result", JLabel.CENTER));
+            JPanel headerPanel = new JPanel(new GridLayout(6, 1));
+            JLabel resultHeader = new JLabel("Result", JLabel.CENTER);
+            resultHeader.setFont(new Font("Arial", Font.BOLD, 24)); 
+            headerPanel.add(resultHeader);
             headerPanel.add(new JLabel("Using " + algorithmName, JLabel.CENTER));
             headerPanel.add(new JLabel("Time taken: " + executionTime + " ms", JLabel.CENTER));
             headerPanel.add(new JLabel("Nodes Traversed: " + Node.getNodesTraverse(), JLabel.CENTER));
             headerPanel.add(new JLabel("Nodes Generated: " + Node.getNodesGenerated(), JLabel.CENTER));
+            headerPanel.add(new JLabel("Length of Path: " + result.getPath().length, JLabel.CENTER));
     
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     
