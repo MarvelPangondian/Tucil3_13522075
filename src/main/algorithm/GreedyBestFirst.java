@@ -18,7 +18,7 @@ public class GreedyBestFirst implements SearchAlgorithm{
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
-        Node.resetNodesTraverse();
+        Node.resetNodeClass();
 
         if (!dictionary.isWord(startWord)){
             throw new InvalidStartWordException();
@@ -55,6 +55,7 @@ public class GreedyBestFirst implements SearchAlgorithm{
                 if (visited.contains(temp)){
                     continue;
                 }
+                Node.incrementNodesGenerated();
                 if (count == 0){
                     currNode = new Node(temp,endWord,path);
                     count++; // count is for the first word only

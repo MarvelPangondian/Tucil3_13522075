@@ -16,7 +16,7 @@ public class AStar implements SearchAlgorithm{
     }
 
     public Node search(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
-        Node.resetNodesTraverse();
+        Node.resetNodeClass();
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
@@ -64,6 +64,7 @@ public class AStar implements SearchAlgorithm{
             
             for(String nodeString : newNodes){
                 if (!visited.contains(nodeString)){
+                    Node.incrementNodesGenerated();
                     visited.add(nodeString);
                     Node node = new Node(nodeString, currNode.getPath().length , currNode.getPath());
                     node.setValue(node.getValue() + node.getWordDifference(endWord));

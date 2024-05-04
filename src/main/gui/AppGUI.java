@@ -125,11 +125,12 @@ class SearchResultWindow extends JFrame {
             JScrollPane scrollPane = new JScrollPane(resultList);
             scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             
-            JPanel headerPanel = new JPanel(new GridLayout(4, 1));
+            JPanel headerPanel = new JPanel(new GridLayout(5, 1));
             headerPanel.add(new JLabel("Result", JLabel.CENTER));
             headerPanel.add(new JLabel("Using " + algorithmName, JLabel.CENTER));
             headerPanel.add(new JLabel("Time taken: " + executionTime + " ms", JLabel.CENTER));
             headerPanel.add(new JLabel("Nodes Traversed: " + Node.getNodesTraverse() , JLabel.CENTER));
+            headerPanel.add(new JLabel("Nodes Generated: " + Node.getNodesGenerated() , JLabel.CENTER));
     
             getContentPane().add(headerPanel, BorderLayout.NORTH);
             getContentPane().add(scrollPane, BorderLayout.CENTER);

@@ -8,6 +8,7 @@ public class Node {
     private int value; // value can be g(n), h(n), or f(n) = g(n) + f(n)
     private String path[];
     private static int nodesTraverse;
+    private static int nodesGenerated;
     private static String startWord;
     private static String endWord;
 
@@ -85,12 +86,31 @@ public class Node {
         Node.nodesTraverse = 0;
     }
 
+    public static void resetNodesGenerated(){
+        Node.nodesGenerated = 0;
+    }
+
     public static void incrementNodesTraverse(){
         Node.nodesTraverse++;
     }
 
+    public static void incrementNodesGenerated(){
+        Node.nodesGenerated++;
+    }
+
     public static int getNodesTraverse(){
         return Node.nodesTraverse;
+    }
+
+    public static int getNodesGenerated(){
+        return Node.nodesGenerated;
+    }
+
+    public static void resetNodeClass(){
+        Node.resetNodesGenerated();;
+        Node.resetNodesTraverse();
+        Node.startWord = "";
+        Node.endWord = "";
     }
 
     public String toString(){
@@ -141,6 +161,7 @@ public class Node {
         }
         System.out.println(this.value);
         System.out.println("Nodes traversed : " + Node.getNodesTraverse());
+        System.out.println("Nodes generated : " + Node.getNodesGenerated());
         System.out.printf("Time : %f ms\n",timeInMs);
 
     }

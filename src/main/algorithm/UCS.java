@@ -16,7 +16,7 @@ public class UCS implements SearchAlgorithm {
         visited.clear();
         startWord = startWord.toLowerCase();
         endWord = endWord.toLowerCase();
-        Node.resetNodesTraverse();
+        Node.resetNodeClass();
 
         if (!dictionary.isWord(startWord)){
             throw new InvalidStartWordException();
@@ -50,6 +50,7 @@ public class UCS implements SearchAlgorithm {
             for(String nodeString : newNodes){
                 if (!visited.contains(nodeString)){
                     visited.add(nodeString);
+                    Node.incrementNodesGenerated();
                     Node node = new Node(nodeString,currNode.getValue() + 1, currNode.getPath());
                     if (node.getWord().equals(endWord) ){
                         return node;
