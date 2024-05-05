@@ -1,10 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
-import dictionary.*;
+import dictionary.Dictionary;
 import util.StringUtil;
-import cli.*;
-import gui.*;
-import prompt.*;
+import cli.CLI;
+import gui.AppGUI;
+import prompt.Prompt;
 
 public class Main {
     public static void main(String args[]){
