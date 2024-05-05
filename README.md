@@ -68,7 +68,7 @@ Pada *windows powershell*, pastikan berada pada *root directory* lalu jalankan r
 ```
 ./run.bat
 ```
-pada *ubuntu(WSL), pastikan berada pada root directory lalu jalankan :
+pada *ubuntu(WSL)*, pastikan berada pada root directory lalu jalankan :
 ```
 chmod +x run.sh
 ./run.sh
