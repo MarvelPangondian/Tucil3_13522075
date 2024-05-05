@@ -179,6 +179,7 @@ Status : *Completed*
 Nama : Marvel Pangondian </br>
 NIM : 13522075 </br>
 Program Studi : Teknik Informatika </br>
+Gmail : marvel.pangondian01@gmail.com</br>
 Profile Github : [MarvelPangondian](https://github.com/MarvelPangondian)
 <!-- Optional -->
 <!-- ## License -->
