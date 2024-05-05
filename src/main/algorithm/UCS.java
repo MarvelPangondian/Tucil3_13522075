@@ -42,12 +42,15 @@ public class UCS implements SearchAlgorithm {
         // Initialize queue
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start);// first element of queue
-        visited.add(startWord);
+        // visited.add(startWord);
 
         while (!queue.isEmpty()){
 
             // dequeue first element in queue
             Node currNode = queue.dequeueNode();
+            if (visited.contains(currNode.getWord())){
+                continue;
+            }
             record = currNode;
             Node.incrementNodesTraverse(); // increment nodes traversed
 
@@ -62,7 +65,7 @@ public class UCS implements SearchAlgorithm {
             // iterate every neighbour
             for(String nodeString : newNodes){
                 if (!visited.contains(nodeString)){
-                    visited.add(nodeString); // update visited
+                
                     Node.incrementNodesGenerated(); // increment nodesGenerated static variable
                     Node node = new Node(nodeString,currNode.getValue() + 1, currNode.getPath()); // create node, with g(n) = distance of node with the start node
 
@@ -77,6 +80,7 @@ public class UCS implements SearchAlgorithm {
                     continue;
                 }
             }
+            visited.add(currNode.getWord()); // update visited
         }
         // situation where there is no solution
         return record;

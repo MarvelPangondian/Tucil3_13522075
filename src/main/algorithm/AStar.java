@@ -1,18 +1,19 @@
+
 package algorithm;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+
 import datastructure.*;
 import customexception.*;
 import dictionary.Dictionary;
 
 public class AStar implements SearchAlgorithm{
-    private Map<String, Integer> visited;
+    private Set<String> visited;
 
     public AStar(){
-        visited = new HashMap<>(); // initialize set object
-
+        visited = new HashSet<>(); // initialize set object
     }
 
     public Node search(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
@@ -46,12 +47,14 @@ public class AStar implements SearchAlgorithm{
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start); // first element of queue
         boolean done = false; 
-        visited.put(startWord,start.getValue());
         
         while (!queue.isEmpty() && !done){
 
             // dequeue first element in queue
             Node currNode = queue.dequeueNode();
+            if (visited.contains(currNode.getWord())){
+                continue;
+            }
             Node.incrementNodesTraverse(); // increment nodes traversed
             record = currNode; // store last node processed
 
@@ -71,33 +74,28 @@ public class AStar implements SearchAlgorithm{
             // Get all neighbour nodes/words
             List<String> newNodes = dictionary.getNeighbors(currNode.getWord());
 
-            int tempValue = currNode.getPath().length;
-            int heuristic; 
             // iterate every neighbour
             for(String nodeString : newNodes){
-                heuristic = tempValue + Node.getWordDifference(nodeString, endWord);  // update value to use heuristic h(n), final value is f(n) = g(n) + h(n) 
-                if (visited.containsKey(nodeString)){
-                    // calculating temporary heuristic value
-                    if (heuristic > visited.get(nodeString)){
-                        continue;
-                    }
- 
-                    
+                if (!visited.contains(nodeString)){
+                    Node.incrementNodesGenerated(); // increment nodesGenerated static variable
+                    Node node = new Node(nodeString, currNode.getPath().length , currNode.getPath()); // create node, with f(n) = distance of node with the start node (g(n))
+                    node.setValue(node.getValue() + node.getWordDifference(endWord)); // update value to use heuristic h(n), final value is f(n) = g(n) + h(n) 
+                    queue.addNode(node); // add node to queue 
                 }
-                Node.incrementNodesGenerated(); // increment nodesGenerated static variable
-                visited.put(nodeString,heuristic); // update visited
-                Node node = new Node(nodeString, heuristic , currNode.getPath()); // create node, with f(n) = distance of node with the start node (g(n))
-                queue.addNode(node); 
-
+                else { // skip visited nodes
+                    continue;
+                }
             }
+            visited.add(currNode.getWord());
         }
 
         // situation where there is no solution
         if (lastNode.getValue() == -1){
             lastNode = record;
         }
-        return lastNode;   
+        return lastNode;
     }
+
 }
 
 
