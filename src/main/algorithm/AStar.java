@@ -1,18 +1,18 @@
 package algorithm;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-
+import java.util.Map;
 import datastructure.*;
 import customexception.*;
 import dictionary.Dictionary;
 
 public class AStar implements SearchAlgorithm{
-    private Set<String> visited;
+    private Map<String, Integer> visited;
 
     public AStar(){
-        visited = new HashSet<>(); // initialize set object
+        visited = new HashMap<>(); // initialize set object
+
     }
 
     public Node search(String startWord, String endWord, Dictionary dictionary ) throws CustomException{
@@ -38,7 +38,7 @@ public class AStar implements SearchAlgorithm{
         Node.setEndWord(endWord);
 
         // Initialize essential nodes
-        Node start = new Node(startWord,0); // distance of start node with root (itself) is 0
+        Node start = new Node(startWord,endWord,new String[]{}); // distance of start node with root (itself) is 0
         Node lastNode = new Node(); // will hold final answer
         Node record = new Node(); // will hold the last processed node
 
@@ -46,7 +46,7 @@ public class AStar implements SearchAlgorithm{
         PriorityQueueNode queue = new PriorityQueueNode();
         queue.addNode(start); // first element of queue
         boolean done = false; 
-        visited.add(startWord);
+        visited.put(startWord,start.getValue());
         
         while (!queue.isEmpty() && !done){
 
@@ -71,18 +71,24 @@ public class AStar implements SearchAlgorithm{
             // Get all neighbour nodes/words
             List<String> newNodes = dictionary.getNeighbors(currNode.getWord());
 
+            int tempValue = currNode.getPath().length;
+            int heuristic; 
             // iterate every neighbour
             for(String nodeString : newNodes){
-                if (!visited.contains(nodeString)){
-                    Node.incrementNodesGenerated(); // increment nodesGenerated static variable
-                    visited.add(nodeString); // update visited
-                    Node node = new Node(nodeString, currNode.getPath().length , currNode.getPath()); // create node, with f(n) = distance of node with the start node (g(n))
-                    node.setValue(node.getValue() + node.getWordDifference(endWord)); // update value to use heuristic h(n), final value is f(n) = g(n) + h(n) 
-                    queue.addNode(node); // add node to queue 
+                heuristic = tempValue + Node.getWordDifference(nodeString, endWord);  // update value to use heuristic h(n), final value is f(n) = g(n) + h(n) 
+                if (visited.containsKey(nodeString)){
+                    // calculating temporary heuristic value
+                    if (heuristic > visited.get(nodeString)){
+                        continue;
+                    }
+ 
+                    
                 }
-                else { // skip visited nodes
-                    continue;
-                }
+                Node.incrementNodesGenerated(); // increment nodesGenerated static variable
+                visited.put(nodeString,heuristic); // update visited
+                Node node = new Node(nodeString, heuristic , currNode.getPath()); // create node, with f(n) = distance of node with the start node (g(n))
+                queue.addNode(node); 
+
             }
         }
 
@@ -90,10 +96,8 @@ public class AStar implements SearchAlgorithm{
         if (lastNode.getValue() == -1){
             lastNode = record;
         }
-        return lastNode;
-        
+        return lastNode;   
     }
-
 }
 
 

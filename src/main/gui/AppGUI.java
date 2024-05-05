@@ -78,7 +78,7 @@ public class AppGUI extends JFrame {
                 long endTime = System.nanoTime();
                 float executionTime = (endTime - startTime) / 1_000_000.0f;
                 if (result.getWord().compareTo(endWord) != 0){
-                    throw new CustomException(String.format("No path can be found !\n Nodes Traversed: %d\n Time: %f ms",Node.getNodesTraverse(),executionTime));
+                    throw new CustomException(String.format("No path can be found!\nUsing %s \nTime take: %f ms\nNodes Traversed: %d \nNodes Generated: %d", selectedAlgorithm,executionTime,Node.getNodesTraverse(),Node.getNodesGenerated()));
                 }
                 SearchResultWindow resultWindow = new SearchResultWindow(result,executionTime,selectedAlgorithm);
                 resultWindow.setVisible(true);

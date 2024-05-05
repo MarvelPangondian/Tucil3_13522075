@@ -131,7 +131,7 @@ public class Node {
     public String toString(){
         String temp = "[";
         for (int i = 0; i < this.path.length; i++) {
-            temp = temp + this.path[i];
+            temp = temp + StringUtil.printNodeInColor(this.path[i], Node.getEndWord());
             
             if (i != this.path.length - 1) {
                 temp += ", ";
@@ -176,9 +176,14 @@ public class Node {
             return;
         }
         System.out.println(this.value);
+        System.out.printf("Time taken : %f ms\n",timeInMs);
         System.out.println("Nodes traversed : " + Node.getNodesTraverse());
         System.out.println("Nodes generated : " + Node.getNodesGenerated());
-        System.out.printf("Time : %f ms\n",timeInMs);
+        if (this.getWord().compareTo(endWord) == 0){
+            System.out.println("Length of Path : " + this.getPath().length + "\n");
+        }
+
+
     }
 
     // Heuristic function
@@ -199,4 +204,23 @@ public class Node {
         return count;
     }
     
+    public static int getWordDifference(String startWord, String endWord) throws CustomException {
+
+
+        if (startWord.length() != endWord.length()){
+            throw new InvalidLengthWord(startWord, endWord);
+        }
+        int count = 0;
+        char[] arr1 = startWord.toCharArray();
+        char[] arr2 = endWord.toCharArray();
+        // asumsikan kedua word memiliki leng
+        for (int i = 0 ; i < arr1.length ; i++){
+            if (arr1[i] != arr2[i]){
+                count++;
+            }
+        }
+        return count;
+
+    }
+
 }

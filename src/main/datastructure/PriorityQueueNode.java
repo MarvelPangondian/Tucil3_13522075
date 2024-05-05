@@ -25,4 +25,8 @@ public class PriorityQueueNode {
     public boolean isEmpty(){
         return this.priorityQueue.isEmpty();
     }
+
+    public PriorityQueue<Node> getPriorityQueue(){
+        return this.priorityQueue;
+    }
 }
