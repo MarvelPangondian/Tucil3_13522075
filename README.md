@@ -1,5 +1,5 @@
-# title
-> lorem ipsum, what is the program used fo
+# Tugas kecil 3 Strategi Algoritma
+> A basic program designed to solve the *Word Ladder* puzzle
 
 ## Daftar Isi
 - [title](#title)
@@ -15,12 +15,11 @@
 ## Sistematika File
 ```
 ├─── bin
-│       ├─── lorem ipsum
-│       └─── 
+│       └─── placeholder.txt
 │
 ├─── doc
-│       ├─── Spesifikasi Tugas Kecil 3 Stima 2023_2024
-│       └─── 
+│       ├─── Spesifikasi Tugas Kecil 3 Stima 2023_2024.pdf
+│       └─── Tucil3_13522075.pdf
 │
 ├─── src
 │       └─── main
@@ -35,9 +34,14 @@
 │                └─── Main.java
 │
 ├─── test
-│       ├─── lorem ipsum
-│       ├─── 
-│       └─── 
+│       ├─── data.txt
+│       ├─── oracleDict.txt
+│       ├─── Picture1.png
+│       ├─── Picture2.png
+│       ├─── Picture3.png
+│       ├─── Picture4.png
+│       ├─── Picture5.png
+│       └─── Picture6.png
 │
 ├─── .gitignore
 ├─── LICENSE
