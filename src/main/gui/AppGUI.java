@@ -62,7 +62,6 @@ public class AppGUI extends JFrame {
                 String endWord = endWordField.getText().toLowerCase();
                 String selectedAlgorithm = (String) algorithmDropdown.getSelectedItem();
         
-                // Simulate search process and throw an exception to demonstrate handling
                 if (startWord.isEmpty() || endWord.isEmpty()) {
                     throw new EmptyWordException();
                 }
