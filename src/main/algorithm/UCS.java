@@ -48,13 +48,13 @@ public class UCS implements SearchAlgorithm {
 
             // dequeue first element in queue
             Node currNode = queue.dequeueNode();
+            Node.incrementNodesTraverse(); // increment nodes traversed
 
             // skip if already been visited before
             if (visited.contains(currNode.getWord())){
                 continue;
             }
             record = currNode;
-            Node.incrementNodesTraverse(); // increment nodes traversed
 
             //check if currNode is the end word
             if (currNode.getWord().equals(endWord) ){

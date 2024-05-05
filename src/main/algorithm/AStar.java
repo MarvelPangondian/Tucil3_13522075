@@ -52,10 +52,13 @@ public class AStar implements SearchAlgorithm{
 
             // dequeue first element in queue
             Node currNode = queue.dequeueNode();
+            Node.incrementNodesTraverse(); // increment nodes traversed
+
+            // skip visited nodes
             if (visited.contains(currNode.getWord())){
                 continue;
             }
-            Node.incrementNodesTraverse(); // increment nodes traversed
+            
             record = currNode; // store last node processed
 
             // Check if the process should be stopped or not
