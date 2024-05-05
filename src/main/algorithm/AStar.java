@@ -75,6 +75,7 @@ public class AStar implements SearchAlgorithm{
             List<String> newNodes = dictionary.getNeighbors(currNode.getWord());
 
             // iterate every neighbour
+            // expansion
             for(String nodeString : newNodes){
                 if (!visited.contains(nodeString)){
                     Node.incrementNodesGenerated(); // increment nodesGenerated static variable
@@ -86,7 +87,7 @@ public class AStar implements SearchAlgorithm{
                     continue;
                 }
             }
-            visited.add(currNode.getWord());
+            visited.add(currNode.getWord()); // update visited after expansion
         }
 
         // situation where there is no solution

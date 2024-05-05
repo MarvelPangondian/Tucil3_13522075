@@ -48,6 +48,8 @@ public class UCS implements SearchAlgorithm {
 
             // dequeue first element in queue
             Node currNode = queue.dequeueNode();
+
+            // skip if already been visited before
             if (visited.contains(currNode.getWord())){
                 continue;
             }
@@ -80,7 +82,7 @@ public class UCS implements SearchAlgorithm {
                     continue;
                 }
             }
-            visited.add(currNode.getWord()); // update visited
+            visited.add(currNode.getWord()); // update visited after expansion
         }
         // situation where there is no solution
         return record;
