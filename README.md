@@ -68,12 +68,12 @@ Pada *windows powershell*, pastikan berada pada *root directory* lalu jalankan r
 ```
 ./run.bat
 ```
-pada *ubuntu(WSL), pastikan berada pada root directory lalu jalankan :
+pada *ubuntu(WSL)*, pastikan berada pada root directory lalu jalankan :
 ```
 chmod +x run.sh
 ./run.sh
 ```
-kedua cara di atas akan otomatis menghasilkan dan menjalankan executable file. Berikut adalah tampiilan program utama :
+kedua cara di atas akan otomatis menghasilkan dan menjalankan executable file. Berikut adalah tampilan program utama :
 ```
       _.--._  _.--._
 ,-=.-":;:;:;\':;:;:;"-._
