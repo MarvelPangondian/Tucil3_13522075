@@ -2,7 +2,7 @@
 > Program sederhana untuk menyelesaikan permainan *Word Ladder*
 
 ## Daftar Isi
-- [title](#title)
+- [title](#tugas-kecil-3-strategi-algoritma)
   - [Daftar Isi](#daftar-isi)
   - [Sistematika File](#sistematika-file)
   - [Deskripsi Program](#deskripsi-program)
