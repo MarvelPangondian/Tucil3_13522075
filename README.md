@@ -56,7 +56,7 @@
 
 ## Deskripsi Program
 Program untuk mencari rangkaian kata dalam permainan *Word Ladder* menggunakan algoritma *Uniform Cost Search*, *Greedy Best First Search*, dan A*. *Word Ladder* adalah permainan untuk mencari rangkaian kata dari kata awal menuju kata akhir, sebagai contoh : *roll -> rool -> room* dimana kata *roll* adalah kata pertama dan kata *room* adalah kata tujuan. Kata dalam rangkaian kata harus memiliki jumlah huruf yang sama serta hanya diperbolehkan satu huruf berbeda antara sebuah kata dengan kata sebelumnya 
-Program mampu menerima kamus yang akan digunakan dalam bentu file *.txt* pada folder *test*. Dengan kamus tersebut, program dapat mencari rangkaian kata antara kata pertama dan kata tujuan dari masukan pengguna.
+Program mampu menerima kamus yang akan digunakan dalam bentuk file *.txt* pada folder *test*. Dengan kamus tersebut, program dapat mencari rangkaian kata antara kata pertama dan kata tujuan dari masukan pengguna.
 
 ## Requirements
 * Java version 21 
