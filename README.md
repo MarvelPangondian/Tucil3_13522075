@@ -123,6 +123,12 @@ Input:
 
 ```
 Penulis memiliki dua pilihan tampilan, yakni tampilan dalam CLI (*Command Line Interface*) atau GUI (*Graphical User Interface*).</br></br>
+Pada setiap mode tampilan, hasilnya akan berupa : 
+
+1. Time Taken -> Waktu eksekusi algoritma dalam *millisecond*
+2. Nodes traversed  -> Banyaknya node yang dikunjungi
+3. Nodes generated -> banyaknya node yang dihasilkan, untuk analisis pemakaian memori
+4. Length of Path -> Panjang rangkaian kata, bukan lompatan, lompatan node adalah *Length of Path - 1*.
 
 Berikut Contoh alur program dalam CLI : </br>
 ```
@@ -156,12 +162,13 @@ Do you want to continue ? (-1 for no, any number for yes):
 ```
 pengguna dapat mengakhiri program dengan masukan (-1) saat pertanyaan *Do you want to continue ?*
 
-Berikut Contoh alur program dalam GUI : </br>
+<br/>Berikut Contoh alur program dalam GUI : </br>
 ![homeImage](./img/img1.png)<br/>
 
 Pengguna dapat memasukan kata awal pada *text box Start Word* dan kata tujuan pada *text box End Word*<br/>
 
 ![searchResult](./img/img2.png)
+
 
 ## Status Proyek
 Status : *Completed*
